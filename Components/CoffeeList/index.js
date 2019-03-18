@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { observer } from "mobx-react";
 
 // NativeBase Components
 import { List, Content } from "native-base";
 
 // Store
-import coffeeshops from "./list";
+
+import coffeeStore from "../Stores/coffeeStore";
 
 // Component
 import CoffeeItem from "./CoffeeItem";
@@ -12,8 +14,8 @@ import CoffeeItem from "./CoffeeItem";
 class CoffeeList extends Component {
   render() {
     let shops;
-    if (coffeeshops) {
-      shops = coffeeshops.map(coffeeShop => (
+    if (coffeeStore.coffeeShops) {
+      shops = coffeeStore.coffeeShops.map(coffeeShop => (
         <CoffeeItem coffeeShop={coffeeShop} key={coffeeShop.id} />
       ));
     }
@@ -25,4 +27,4 @@ class CoffeeList extends Component {
   }
 }
 
-export default CoffeeList;
+export default observer(CoffeeList);
